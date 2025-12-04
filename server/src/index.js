@@ -23,7 +23,7 @@ app.use(cors({
     credentials: true
 }));
 
-/basic test route
+//basic test route
 app.get('/',(req,res)=>{
     res.status(200).json({
         message:'E-learning API is running',
