@@ -1,5 +1,21 @@
-node_modules
-dist
-.env
+# Dependency directories
+node_modules/
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# OS/IDE junk
 .DS_Store
-coverage
+.idea/
+.vscode/
+*.iml
+
+# Environment variables
+.env
+.env.local
+
+# Build outputs
+.next/
+dist/
+build/
