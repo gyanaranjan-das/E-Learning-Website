@@ -3,7 +3,17 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/layout/Navbar';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
+import Courses from './pages/Courses';          // <-- Import this
+import CoursePlayer from './pages/CoursePlayer'; // <-- Import this
 import { useAuthStore } from './store/useAuthStore';
+
+// Layout wrapper for pages that need a Navbar
+const MainLayout = ({ children }) => (
+  <>
+    <Navbar />
+    {children}
+  </>
+);
 
 // Protected Route Wrapper
 const ProtectedRoute = ({ children }) => {
@@ -14,19 +24,49 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-background text-white">
-        <Navbar />
+      <div className="min-h-screen bg-background text-white font-sans">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          {/* Public Route: Landing Page */}
+          <Route 
+            path="/" 
+            element={
+              <MainLayout>
+                <LandingPage />
+              </MainLayout>
+            } 
+          />
+
+          {/* Public Route: Course Catalog */}
+          <Route 
+            path="/courses" 
+            element={
+              <MainLayout>
+                <Courses />
+              </MainLayout>
+            } 
+          />
+          
+          {/* Protected Route: Dashboard */}
           <Route 
             path="/dashboard" 
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
               </ProtectedRoute>
             } 
           />
-          {/* Add Login/Signup routes here later */}
+
+          {/* Protected Route: Course Player (No Navbar for immersion) */}
+          <Route 
+            path="/course/:id" 
+            element={
+              <ProtectedRoute>
+                <CoursePlayer />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </div>
     </Router>
