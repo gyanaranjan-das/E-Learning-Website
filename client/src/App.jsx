@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard';
 import Courses from './pages/Courses';          // <-- Import this
 import CoursePlayer from './pages/CoursePlayer'; // <-- Import this
 import { useAuthStore } from './store/useAuthStore';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 // Layout wrapper for pages that need a Navbar
 const MainLayout = ({ children }) => (
@@ -67,6 +69,8 @@ function App() {
               </ProtectedRoute>
             } 
           />
+          <Route path='/login' element={<Login />}/>
+          <Route path='/signup' element={<Signup/>}/>
         </Routes>
       </div>
     </Router>
